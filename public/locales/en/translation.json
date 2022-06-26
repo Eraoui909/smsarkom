@@ -1,0 +1,22 @@
+{
+  "login_email"               : "You Email",
+  "login_password"            : "You Password",
+  "submit"                    : "Submit",
+  "login_register_qst"        : "you don't have an account?",
+
+  "register"                  : {
+    "full_name"               : "Full Name",
+    "email"                   : "Email",
+    "gender"                  : "Gender",
+    "male"                    : "male",
+    "female"                  : "female",
+    "country_city"            : "Country/City",
+    "morocco"                 : "Morocco",
+    "fes"                     : "Fes",
+    "sefrou"                  : "Sefrou",
+    "casablanca"              : "Casablanca",
+    "birthday"                : "Birthday",
+    "password"                : "Password",
+    "iHaveAccount"            : "I already have an account Login"
+  }
+}

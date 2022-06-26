@@ -1,0 +1,39 @@
+.banner {
+    /* Banner is displayed at the bottom */
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+
+    /* Center the content */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    background-color: #EEEEEE;
+}
+
+.banner__content {
+    /* Take available width */
+}
+.ha-banner{
+    width: 70%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ha-btn{
+    margin: auto 5px;
+}
+
+.ha-cookie-icon{
+    font-size: 30px;
+    width: 100px;
+    color: #4f46e5;
+}
+
+.hideCookieBanner{
+    display: none;
+}

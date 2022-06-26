@@ -1,0 +1,21 @@
+.container {
+    /* Content is centered horizontally */
+    align-items: center;
+    display: flex;
+
+    /* Used to set the position of text */
+    position: relative;
+
+    margin: 30px auto;
+}
+
+
+
+.container__separator {
+    border-bottom: 1px solid #e7e7e75e;
+    height: 1px;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px 1px rgb(0 0 0 / 16%);
+}
+
