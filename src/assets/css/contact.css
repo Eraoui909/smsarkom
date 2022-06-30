@@ -1,0 +1,46 @@
+
+
+
+.ha-contact-container{
+    padding: 15px;
+    width: 60%;
+    box-shadow: 0 5px 15px -1px rgb(0 0 0 / 16%);
+    margin: 10px auto;
+}
+
+.ha-contact-form{
+    padding: 15px;
+    margin: 10px auto;
+    text-align: left;
+}
+
+.ha-contact-form-form{
+    padding: 10px !important;
+}
+
+.ant-form-item-label{
+    max-width: 150px !important;
+    margin-right: 10px;
+    text-align: left !important;
+}
+
+.ha-btn-container{
+    margin-left: calc(15% + 40px);
+}
+.ha-contact-btn{
+    padding: 5px 10px !important;
+    border-radius: 10px !important;
+    width: 100px;
+    display: flex !important;
+    justify-content: space-around;
+}
+
+
+@media (max-width: 640px) {
+
+    .ha-contact-container {
+        width: 75%;
+        padding: 15px 0;
+    }
+
+}

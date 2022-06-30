@@ -180,3 +180,16 @@
         width: 100%;
     }
 }
+
+.ha-navbar-home nav{
+    background-color: transparent !important;
+    color:  #d1d5db !important;
+}
+
+.sticky-nav-secondary {
+    position: relative !important;
+}
+
+.ha-navbar-home nav li a{
+    color:  #d1d5db !important;
+}

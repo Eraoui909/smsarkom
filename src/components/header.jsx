@@ -1,7 +1,9 @@
-import {logoUrl} from '../constants/global'
 import '../assets/css/headerStyle.css'
 import {navigation} from "../constants/global";
 import {Link} from "react-router-dom";
+import {logoUrl} from "../constants/global";
+
+import Navbar from'../components/navbar'
 
 export default () => {
 
@@ -10,7 +12,7 @@ export default () => {
     return (
         <div className="hero-dark-container">
 
-
+            {/*
             <header className="hero-dark-header">
                 <nav className="hero-nav">
                     <a href="javascript:void(0)">
@@ -40,6 +42,10 @@ export default () => {
                     </ul>
                 </nav>
             </header>
+            */}
+
+            <Navbar className="ha-navbar-home" logo={"home"} />
+
             <section className="hero-dark">
                 <div className="hero-details">
                     <h1>

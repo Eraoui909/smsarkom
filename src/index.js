@@ -7,6 +7,11 @@ import reportWebVitals from './reportWebVitals';
 import './i18n'
 import 'antd/dist/antd.css'
 
+// ES6 Modules or TypeScript
+import Swal from 'sweetalert2'
+
+// CommonJS
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(

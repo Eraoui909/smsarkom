@@ -1,8 +1,18 @@
 {
-  "login_email"               : "You Email",
-  "login_password"            : "You Password",
+
   "submit"                    : "Submit",
-  "login_register_qst"        : "you don't have an account?",
+
+  "login"                     : {
+    "email"                     : "Your Email",
+    "password"                  : "Your Password",
+    "register_qst"              : "you don't have an account?"
+  },
+
+  "errors"                    : {
+    "email_required"            : "email is required",
+    "password_required"         : "password is required",
+    "pass_length"               : "password must be larger than 6 characters"
+  },
 
   "register"                  : {
     "full_name"               : "Full Name",
@@ -18,5 +28,15 @@
     "birthday"                : "Birthday",
     "password"                : "Password",
     "iHaveAccount"            : "I already have an account Login"
+  },
+
+  "contact"                   : {
+    "name"                    : "Name",
+    "email"                   : "Email",
+    "subject"                 : "Subject",
+    "message"                 : "Message",
+    "send"                    : "Send"
   }
+
+
 }

@@ -5,31 +5,134 @@ import {
     Form,
     Input,
     Select,
+    Alert
 
 } from 'antd';
 import { useState } from 'react';
 import '../assets/css/regsterStyle.css'
 import { useTranslation } from "react-i18next";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClose} from "@fortawesome/free-solid-svg-icons";
 import {logoUrlInverse} from "../constants/global";
 import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
 import Separator from './separator'
+import {store,fetchUsers} from '../services/userService'
+import Swal from "sweetalert2";
 
 export default  () => {
 
     const { t } = useTranslation();
+
+    const [nameError,setNameError] = useState("");
+    const [emailError,setEmailError] = useState("");
+    const [genderError,setGenderError] = useState("");
+    const [cityError,setCityError] = useState("");
+    const [countryError,setCountryError] = useState("");
+    const [birthdayError,setBirthdayError] = useState("");
+    const [passwordError,setPasswordError] = useState("");
+
+    const [registered,setRegistered] = useState("");
 
 
     const [componentSize, setComponentSize] = useState('default');
 
     const [formValues, setFormValues] = useState()
 
-    const onFinish = (values) => {
-        console.log("Values received:", values);
+    const navigate  = useNavigate();
 
 
+    const onFinish = async (values) => {
+        //console.log("Values received:", values);
+
+        const data = {
+            "fullname" : values.full_name,
+            "email"	   : values.email,
+            "password" : values.password,
+            "address"  : "test",
+            "username" : "test",
+            "gender"   : values.gender,
+            "type"	   : "test",
+            "country"  : values.country_city[0],
+            "city"	   : values.country_city[1]
+        }
+
+        await store(data).then(response => {
+            //console.log("response = "+response.data);
+            setRegistered("You are registered with Success")
+            setTimeout(
+                navigate("/login")
+            ,1000);
+        }).catch(error => {
+
+                if (error.response) {
+                    if( error.response.status === 422){
+                        console.log(error.response.data.errors)
+                            let errors = error.response.data.errors;
+                        (errors.fullname != null)?setNameError(errors.fullname):setNameError("");
+                        (errors.email != null)?setEmailError(errors.email):setEmailError("");
+                        (errors.password != null)?setPasswordError(errors.password):setPasswordError("");
+                        (errors.gender != null)?setGenderError(errors.gender):setGenderError("");
+                        (errors.country != null)?setCountryError(errors.country):setCountryError("");
+                        (errors.city != null)?setCityError(errors.city):setCityError("");
+                        (errors.birthday != null)?setBirthdayError(errors.birthday):setBirthdayError("");
+
+                        if((errors.fullname != null)) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: errors.fullname,
+                            })
+                        }else if(errors.email != null){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: errors.email,
+                            })
+                        }else if(errors.password != null){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: errors.password,
+                            })
+                        }else if(errors.gender != null){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: errors.gender,
+                            })
+                        }else if(errors.country != null){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: errors.country,
+                            })
+                        }else if((errors.city != null)){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: errors.country,
+                            })
+                        }else if(errors.birthday != null){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: errors.birthday,
+                            })
+                        }
+                    }
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the
+                    // browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log("request ERROR (userService) = "+error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log("ERROR (userService) = "+ error.message);
+                }
+                //console.log(error.config);
+            });
     };
 
 
@@ -41,6 +144,7 @@ export default  () => {
                 <FontAwesomeIcon icon={faClose} className="ha-close-btn" />
             </Link>
 
+
             <div className="ha-register-form">
 
                 <center class="ha-logo-area">
@@ -51,6 +155,10 @@ export default  () => {
                         alt="Float UI logo"
                     />
                 </center>
+
+                {registered && <center>
+                    <Alert message={registered} showIcon type="success" />
+                </center>}
 
                 <Form
                     labelCol={{
@@ -79,11 +187,13 @@ export default  () => {
                                 type:"string"
                             },
                         ]}
+                        validateStatus={nameError && "error"}
                     >
-                        <Input placeholder="Hamza Eraoui" />
+                        <Input placeholder="your name" />
                     </Form.Item>
 
                     <Form.Item name="email"
+                               validateStatus={emailError && "error"}
                                rules={[
                                 {
                                     required: true,
@@ -91,6 +201,7 @@ export default  () => {
                                     type: "email",
 
                                 },
+
                     ]}
                                label={t("register.email")}>
                         <Input placeholder="email@email.com" />
@@ -105,6 +216,7 @@ export default  () => {
                                 message: "Your gender cannot be empty!",
                             },
                         ]}
+                        validateStatus={genderError && "error"}
                     >
                         <Select >
                             <Select.Option  value="male">{t("register.male")}</Select.Option>
@@ -121,6 +233,7 @@ export default  () => {
                                 message: "Your country & city cannot be empty!",
                             },
                         ]}
+                        validateStatus={cityError && "error"}
                     >
                         <Cascader defaultValue="morocco"
                             options={[
@@ -156,6 +269,7 @@ export default  () => {
                                 message: "Your birthday cannot be empty!",
                             },
                         ]}
+                        validateStatus={birthdayError && "error"}
                     >
                         <DatePicker />
                     </Form.Item>
@@ -169,12 +283,14 @@ export default  () => {
                                 message: "Your password cannot be empty!",
                             },
                         ]}
+                        validateStatus={passwordError && "error"}
                     >
                         <Input.Password
 
                             placeholder="your password"
                             iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                         />
+
                     </Form.Item>
 
                     <Button type="primary" htmlType="submit" shape="round"  className="ha-register-btn" >{t("submit")}</Button>

@@ -8,6 +8,7 @@ import Apartments from "./views/Apartments";
 import {Navigate} from "react-router";
 import Login from "./views/Login";
 import Register from "./views/Register";
+import Contact from "./views/Contact";
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/apartments"  element={<Apartments />}  />
             <Route path="/login"  element={<Login />}  />
             <Route path="/register"  element={<Register />}  />
+            <Route path="/contact"  element={<Contact />}  />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
