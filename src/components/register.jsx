@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/rules-of-hooks */
 import {
     Button,
     Cascader,
@@ -6,7 +8,6 @@ import {
     Input,
     Select,
     Alert
-
 } from 'antd';
 import { useState } from 'react';
 import '../assets/css/regsterStyle.css'
@@ -20,22 +21,23 @@ import Separator from './separator'
 import {store,fetchUsers} from '../services/userService'
 import Swal from "sweetalert2";
 
-export default  () => {
+const  register =  () => {
 
     const { t } = useTranslation();
 
-    const [nameError,setNameError] = useState("");
-    const [emailError,setEmailError] = useState("");
-    const [genderError,setGenderError] = useState("");
-    const [cityError,setCityError] = useState("");
-    const [countryError,setCountryError] = useState("");
-    const [birthdayError,setBirthdayError] = useState("");
-    const [passwordError,setPasswordError] = useState("");
+    const [nameError,setNameError]          = useState("");
+    const [emailError,setEmailError]        = useState("");
+    const [genderError,setGenderError]      = useState("");
+    const [cityError,setCityError]          = useState("");
+    const [countryError,setCountryError]    = useState("");
+    const [birthdayError,setBirthdayError]  = useState("");
+    const [passwordError,setPasswordError]  = useState("");
+
+    const [componentSize, setComponentSize] = useState('default');
+
 
     const [registered,setRegistered] = useState("");
 
-
-    const [componentSize, setComponentSize] = useState('default');
 
     const [formValues, setFormValues] = useState()
 
@@ -61,7 +63,9 @@ export default  () => {
             //console.log("response = "+response.data);
             setRegistered("You are registered with Success")
             setTimeout(
-                navigate("/login")
+                ()=>{
+                    navigate("/login")
+                }
             ,1000);
         }).catch(error => {
 
@@ -138,7 +142,9 @@ export default  () => {
 
     return (
 
+
         <div className="ha-register-container">
+
 
             <Link to="/home" >
                 <FontAwesomeIcon icon={faClose} className="ha-close-btn" />
@@ -309,3 +315,5 @@ export default  () => {
     );
 };
 
+
+export default register;

@@ -1,17 +1,28 @@
 import {Navigate, Route} from "react-router-dom";
+import { logged } from "./services/userService";
 
 
-const ProtectedRoute = ({element: Component,condition, failRedirect, ...rest}) =>{
+const ProtectedRouteLogin = ({redirectTo,children}) =>{
 
-    return (
-        <Route
-            {...rest}
-            render={ props => {
-                if(!condition) return <Navigate to={failRedirect} />;
-                return <Component {...props} />;
-            }}
-        />
-    );
+    if( logged() ){
+        return <Navigate to={redirectTo} replace />
+    }else{
+        return children;
+    }
 }
 
-export default ProtectedRoute;
+const ProtectedRoute = ({redirectTo,children}) =>{
+
+    if( !logged() ){
+        return <Navigate to={redirectTo} replace />
+    }else{
+        return children;
+    }
+}
+
+
+
+export { 
+    ProtectedRouteLogin,
+    ProtectedRoute
+};

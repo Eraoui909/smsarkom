@@ -181,3 +181,85 @@
     overflow: auto;
     padding-right: 1rem;
 }
+
+.ha-profile-dropdown .profile-dropdown {
+    position: relative;
+  }
+  .ha-profile-dropdown .profile-dropdown .avatar-container {
+    display: flex;
+    align-items: center;
+  }
+  .ha-profile-dropdown .profile-dropdown .avatar-container > * + * {
+    margin-left: 1rem;
+  }
+  .ha-profile-dropdown .profile-dropdown .avatar-container .avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    outline: none;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #e5e7eb;
+  }
+  @media (min-width: 1024px) {
+    .ha-profile-dropdown .profile-dropdown .avatar-container .avatar:focus {
+      box-shadow: 0 0 0 2px white, 0 0 0 4px #4f46e5;
+    }
+  }
+  .ha-profile-dropdown .profile-dropdown .avatar-container .avatar img {
+    border-radius: 50%;
+  }
+  .ha-profile-dropdown .profile-dropdown .avatar-container .user-info span {
+    display: block;
+  }
+  .ha-profile-dropdown .profile-dropdown .avatar-container .user-info span:last-of-type {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #6b7280;
+  }
+  @media (min-width: 1024px) {
+    .ha-profile-dropdown .profile-dropdown .avatar-container .user-info {
+      display: none;
+    }
+  }
+  .ha-profile-dropdown .profile-dropdown ul {
+    background-color: #FFF;
+    top: 3rem;
+    right: 0;
+    margin-top: 1.25rem;
+    z-index: 1;
+  }
+  .ha-profile-dropdown .profile-dropdown ul > * + * {
+    margin-top: 1.25rem;
+  }
+  @media (min-width: 1024px) {
+    .ha-profile-dropdown .profile-dropdown ul {
+      position: absolute;
+      border: solid 1px #e5e7eb;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      box-shadow: 0 4px 6px -1px #0000001a, 0 2px 4px -2px #0000001a;
+      width: 13rem;
+      margin-top: 0;
+    }
+    .ha-profile-dropdown .profile-dropdown ul > * + * {
+      margin-top: 0px;
+    }
+  }
+  .ha-profile-dropdown .profile-dropdown ul li a {
+    display: block;
+    color: #4b5563 !important;
+  }
+  @media (min-width: 1024px) {
+    .ha-profile-dropdown .profile-dropdown ul li a {
+      padding: 0.625rem;
+    }
+    .ha-profile-dropdown .profile-dropdown ul li a:hover {
+      background-color: #f9fafb;
+    }
+  }
+  @media (min-width: 1024px) {
+    .ha-profile-dropdown .profile-dropdown .hide-items {
+      display: none;
+    }
+  }
+  

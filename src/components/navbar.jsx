@@ -1,12 +1,50 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useRef, useState } from 'react'
 import '../assets/css/navbar.css'
-import {logoUrlInverse,logoUrl, navigation} from "../constants/global";
+import {logoUrlInverse,logoUrl, navigation, dropDownNavigation} from "../constants/global";
 import {Link} from "react-router-dom";
+import { fetchUser } from '../services/userService';
+import { useTranslation } from 'react-i18next';
 
-export default ({logo,...props}) => {
+
+const navbar =  ({logo,...props}) => {
 
     const [state, setState] = useState(false)
+    const [stateDropdown,setStateDropdown] = useState(false)
     const navRef = useRef()
+    const [logged,setLogged] = useState(true);
+
+    const [t] = useTranslation();
+
+    const navigation = [
+        { title: "Home", path: "/" }, //i18next.t("navbar.home")
+        { title: t("navbar.apartments"), path: "/apartments" },
+        { title: t("navbar.make_an_offer"), path: "/make-an-offer" },
+        { title: t("navbar.about_us"), path: "/about" },
+        { title: t("navbar.contact"), path: "/contact" },
+    ]
+    
+    
+    const dropDownNavigation = [
+        { title: t("navbar.profile"), path: "/profile" },
+        { title: t("navbar.logout"), path: "/logout" },
+    ]
+
+
+    useEffect(()=>{
+
+        
+
+        if(fetchUser() !== "empty"){
+            //console.log("logged");
+            setLogged(true)
+        }else{
+            //console.log("logout");
+            setLogged(false)
+        }
+    },[1])
 
 
 
@@ -31,7 +69,7 @@ export default ({logo,...props}) => {
             <nav ref={navRef}  className="nav-secondary">
                 <div className="nav-container">
                     <div className="brand">
-                        <a href="javascript:void(0)">
+                        <a href="#">
                             <img
                                 src={(logo==="home"?logoUrl:logoUrlInverse)}
                                 width={100}
@@ -58,20 +96,55 @@ export default ({logo,...props}) => {
                         </div>
                     </div>
                     <div className={`nav-items-container ${ state ? 'show-nav-secondary' : 'hide-nav-secondary'}`}>
-                        <div className="nav-items-primary">
-                            <ul>
-                                <li className="login-link">
-                                    <Link to="/login">
-                                        Login
-                                    </Link>
-                                </li>
-                                <li className="signup-link">
-                                    <Link to="/register">
-                                        Sign Up
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
+
+
+                        {
+                            !logged &&
+                            <div className="nav-items-primary">
+                                <ul>
+                                    <li className="login-link">
+                                        <Link to="/login">
+                                            Login
+                                        </Link>
+                                    </li>
+                                    <li className="signup-link">
+                                        <Link to="/register">
+                                            Sign Up
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        {
+                            logged &&
+                            <div className="ha-profile-dropdown">
+                                <div className={`profile-dropdown`}>
+                                    <div className="avatar-container">
+                                        <button  className="avatar"
+                                            onClick={() => setStateDropdown(!stateDropdown)}
+                                        >
+                                            <img src="https://randomuser.me/api/portraits/men/46.jpg"/>
+                                        </button>
+                                        <div className="user-info">
+                                            <span>Micheal John</span>
+                                            <span>john@gmail.com</span>
+                                        </div>
+                                    </div>
+                                    <ul className={`${stateDropdown ? '' : 'hide-items'}`}>
+                                        {
+                                            dropDownNavigation.map((item, idx) => (
+                                                <li>
+                                                    <Link key={idx} to={item.path}>
+                                                        {item.title}
+                                                    </Link>
+                                                </li>
+                                            ))
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+
                         <div className="nav-items-secondary">
                             <ul>
                                 {
@@ -87,9 +160,12 @@ export default ({logo,...props}) => {
                                 }
                             </ul>
                         </div>
+                        
                     </div>
                 </div>
             </nav>
         </div>
     )
 }
+
+export default navbar;

@@ -1,8 +1,12 @@
+/* eslint-disable import/no-anonymous-default-export */
 import '../assets/css/contact.css'
-import { Button, Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input, InputNumber, Spin } from 'antd';
 import { useTranslation } from "react-i18next";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
+import { useState } from 'react';
+import { sendMessage } from '../services/contactService';
+import { Alert } from 'antd';
 
 
 const layout = {
@@ -30,9 +34,50 @@ export default () => {
 
     const { t } = useTranslation();
 
+    const [username , setUserName ] = useState("");
+    const [ email , setEmail ]      = useState("");
+    const [ subject , setSubject ]  = useState("");
+    const [ message , setMessage ]  = useState("");
+    const [usernameError , setUserNameError ] = useState("");
+    const [ emailError , setEmailError ]      = useState("");
+    const [ subjectError , setSubjectError ]  = useState("");
+    const [ messageError , setMessageError ]  = useState("");
 
-    const onFinish = (values) => {
-        console.log(values);
+    const [ messageSent , setMessageSent ]  = useState("");
+
+
+    const [loading, setLoading] = useState(false);
+
+    const [form] = Form.useForm();
+
+
+
+    const onFinish = async (values) => {
+        //console.log(values);
+        setLoading(true);
+
+        await sendMessage(values).then( response  => {
+            //console.log(response)
+            setMessageSent("Le message envoyer avec succee")
+            setLoading(false);
+            form.resetFields();
+        }).catch(error =>{
+
+            let errors = error.response.data.errors;
+            if( errors.subject !== undefined ){
+                setSubjectError(errors.subject)
+            }
+            if( errors.message !== undefined ){
+                setMessageError(errors.message)
+            }
+            if( errors.full_name !== undefined ){
+                setUserNameError(errors.full_name)
+            }
+            if( errors.email !== undefined ){
+                setEmailError(errors.email)
+            }
+            setLoading(false);
+        })
     };
 
     return (
@@ -42,9 +87,17 @@ export default () => {
 
                 <div className="ha-contact-form">
 
-                    <Form {...layout} className="ha-contact-form-form" name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+                    { usernameError && <Alert  message={usernameError} type="error" showIcon />}
+                    { emailError && <Alert  message={emailError} type="error" showIcon />}
+                    { subjectError && <Alert  message={subjectError} type="error" showIcon />}
+                    { messageError && <Alert  message={messageError} type="error" showIcon />}
+                    { messageSent && <Alert  message={messageSent} type="success" showIcon />}
+
+
+
+                    <Form form={form} {...layout} className="ha-contact-form-form" name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                         <Form.Item
-                            name="name"
+                            name="full_name"
                             label={t("contact.name")}
                             rules={[
                                 {
@@ -86,12 +139,18 @@ export default () => {
                             <Input.TextArea />
                         </Form.Item>
                         <Form.Item className="ha-btn-container" wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+
+                            
+                        <Spin spinning={loading} delay={500}>
                             <Button className="ha-contact-btn" type="primary" htmlType="submit">
-                                <span>{t("contact.send")}</span>
-                                <span>
-                                    <FontAwesomeIcon icon={faPaperPlane} />
-                                </span>
+                                    <span>{t("contact.send")}</span>
+                                    <span>
+                                        <FontAwesomeIcon icon={faPaperPlane} />
+                                    </span>
                             </Button>
+                        </Spin>
+
+
                         </Form.Item>
                     </Form>
 

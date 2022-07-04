@@ -9,6 +9,10 @@ import {Navigate} from "react-router";
 import Login from "./views/Login";
 import Register from "./views/Register";
 import Contact from "./views/Contact";
+import Logout from "./components/logout";
+import {ProtectedRoute, ProtectedRouteLogin} from './PretectedRoute';
+import Profile from './views/Profile';
+
 
 function App() {
 
@@ -32,9 +36,19 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about"  element={<AboutUs />} />
             <Route path="/apartments"  element={<Apartments />}  />
-            <Route path="/login"  element={<Login />}  />
-            <Route path="/register"  element={<Register />}  />
+            <Route path="/login"  element={<ProtectedRouteLogin redirectTo="/" >
+                        <Login />
+                </ProtectedRouteLogin>} />
+            <Route path="/register"  element={<ProtectedRouteLogin redirectTo="/" >
+                        <Register />
+                </ProtectedRouteLogin>}   />
             <Route path="/contact"  element={<Contact />}  />
+            <Route path="/logout"  element={<ProtectedRoute redirectTo="/" >
+                        <Logout />
+                </ProtectedRoute>}   />
+            <Route path="/profile"  element={<ProtectedRoute redirectTo="/login" >
+                    <Profile />
+            </ProtectedRoute>}   />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 

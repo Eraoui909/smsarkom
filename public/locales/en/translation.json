@@ -2,10 +2,21 @@
 
   "submit"                    : "Submit",
 
+  "navbar"                    : {
+    "home"                      : "Home",
+    "apartments"                : "Apartments",
+    "make_an_offer"             : "Make An Offer",
+    "about_us"                  : "About Us",
+    "contact"                   : "Contact",
+    "logout"                    : "Log Out",
+    "profile"                   : "Profile"
+  },
+
   "login"                     : {
     "email"                     : "Your Email",
     "password"                  : "Your Password",
-    "register_qst"              : "you don't have an account?"
+    "register_qst"              : "you don't have an account?",
+    "login_success"             : "your logged with success"
   },
 
   "errors"                    : {
@@ -36,6 +47,50 @@
     "subject"                 : "Subject",
     "message"                 : "Message",
     "send"                    : "Send"
+  },
+
+  "profile"                   : {
+
+    "profile"                   : "Profile",
+    "offers"                    : "Offers",
+    "makeAnOffer"               : "Make An Offer",
+    "title"                     : "Title",
+    "description"               : "Description",
+    "price"                     : "Price",
+    "upload"                    : "Upload",
+    "city"                      : "City",
+    "country"                   : "Country",
+    "agentFees"                 : "Agent Fees",
+    "area"                      : "Area",
+    "garage"                    : "Garage",
+    "builtIn"                   : "BuiltIn",
+    "type"                      : "Type",
+    "category"                  : "Category",
+    "location"                  : "Location",
+    "details"                   : "Details",
+    "rent"                      : "Rent",
+    "sell"                      : "Sell",
+    "mortgage"                  : "Mortgage",
+    "residential"               : "Residential",
+    "educational"               : "Educational",
+    "assembly"                  : "Assembly",
+    "business"                  : "Business",
+    "mercantile"                : "Mercantile",
+    "industrial"                : "Industrial",
+    "storage"                   : "Storage",
+    "offerAdded"                : "Offer Added with Success"
+  },
+
+  "validation"                : {
+
+    "required"                  : "${label} is required!",
+    "types"                     : {
+          "email"                 : "${label} is not a valid email!",
+          "number"                : "${label} is not a valid number!"
+        },
+    "number": {
+      "range"                   : "${label} must be between ${min} and ${max}"
+    }
   }
 
 

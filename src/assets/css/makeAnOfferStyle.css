@@ -1,0 +1,22 @@
+.steps-content {
+    min-height: 200px;
+    margin-top: 16px;
+    padding-top: 20px;
+    text-align: center;
+    background-color: #fafafad2;
+    border: 1px dashed #e9e9e9;
+    border-radius: 2px;
+  }
+  
+  .steps-action {
+    margin-top: 24px;
+  }
+
+  .ha-general-info-container{
+    padding: 15px;
+  }
+
+  .ha-msg-area{
+    width: 90%;
+    margin: 10px auto;
+  }

@@ -1,0 +1,39 @@
+.ha-profile-container > div{
+
+    padding:15px;
+} 
+
+
+.ha-profile-left{
+
+}
+.ha-profile-right{
+    background-color: #fff;
+}
+
+.ha-avatar-card{
+    border: 1px solid #EEE;
+    box-shadow: 0 5px 15px -1px rgb(0 0 0 / 16%);
+
+}
+
+.ha-custom-grid{
+
+    flex-wrap: wrap;
+
+}
+
+@media screen and (max-width:1000px) {
+
+    .ha-custom-grid{
+
+        display: block !important;
+    }
+    .ha-profile-left{
+
+        margin: 10px;
+    }
+    .ha-profile-right{
+        max-width: 100% !important;
+    }
+}

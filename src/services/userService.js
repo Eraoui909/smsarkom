@@ -11,17 +11,41 @@ const loginUser =  (data) => {
     return   http.post(config.apiEndPoint + "/auth/login", data);
 }
 
-const fetchUsers = async () =>{
+const fetchUser = () =>{
 
-    const promise = await http.get(config.apiEndPoint + "/auth/users");
-    promise.then(res => {
-        const persons = res.data;
-        console.log(persons)
-    })
+    let user = {};
+    let token;
+
+    
+    if (localStorage.getItem("token") === null){
+        return "empty";
+    }
+
+    user.username   = localStorage.getItem("full_name");
+    user.email      = localStorage.getItem("email");
+    token           = localStorage.getItem("token");
+
+    return {user,token};
+}
+
+const logoutUser = () =>{
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
+}
+
+const logged = () =>{
+    if (localStorage.getItem("token") === null){
+        return false;
+    }else{
+        return true;
+    }
 }
 
 export {
     store,
-    fetchUsers,
-    loginUser
+    fetchUser,
+    loginUser,
+    logoutUser,
+    logged
 }
